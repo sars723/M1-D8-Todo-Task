@@ -1,220 +1,198 @@
-<html>
+<!DOCTYPE html>
+<!--
+ASSIGNMENT RULES
+- The solution must be pushed to the repository and be available for the tutors by the end of the day
+- You can ask for tutor's help
+- You can google / use StackOverflow BUT we suggest you to use just the material provided
+- To test the page, just open it with your default browser.
+
+ASSIGNMENT TOPIC
+You are building a task list site.
+The have a list of arrComp and can, at any time, add a new one, delete one or sort the whole bunch of them
+-->
+<html lang="en">
   <head>
+    <!-- EXERCISE 1:
+    Specify the title, the charset (UTF-8) and the viewport of the page.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Task List</title>
     
+    </head>
+    <body>
+        
+    </body>
+    </html>
 
     <style>
-      .myHeading {
-        color: red;
-      }
+      /* EXERCISE 2:  
+       Create a CSS class for the task list with a diverse background
+       Create a CSS class for the task list item with a border, a bold text and a bigger font size
+       Style every button of the page to be bigger
+    */
+    .task-list{
+        background-color: azure;
+
+    }
+    .task-list-item{
+        border:1px solid black;
+        font-weight: bold;
+        font-size: 30px;
+    }
     </style>
   </head>
   <body>
-    <header>
-      <h1>This is the title of the page</h1>
-      <h2>This is the subtitle of the page</h2>
-    </header>
+    <h1>Welcome to your personal Task List!</h1>
+    <br />
 
-    <main>
-      <hr />
-    <nav>
-      <ul id="firstList">
-        <li>1st</li>
-        <li>2nd</li>
-        <li>3rd</li>
-      </ul>
-    </nav>
-    <article>
-      <ul id="secondList">
-        <li>1st</li>
-        <li>2nd</li>
-        <li>3rd</li>
-      </ul>
+    <span
+      >You can add any task you like by writing it in the specified field and
+      then press "Add new task"</span
+    ><br /><br />
 
-      <a href="strive.school">This link goes to Strive School</a>
-      <a href="strive.school">This link goes to Strive School</a>
-    
-      <div>
-        <p>This text is just for the exercise</p>
-      </div>
-    </article>
-      <aside>
-          <div>
-            <input
-              type="text"
-              id="input-field"
-              placeholder="input field for the exercise"
-            />
-          </div>
-      </aside>
-    </main>
+    <input type="text" id="newTask" />
+    <input type="button" value="Add new Task" onclick="addNewTask()" />
 
-    <footer>
-      <p>And this text is just for the exercise too!</p>
-    </footer>
+    <!-- EXERCISE 3
+        Create a button "Remove Last Task" to trigger the method "removeLast"
+        -->
+        <input type="button" value="Remove last Task" onclick="removeLast()" />
+    <!-- EXERCISE 4
+        Create a button "Remove First Task" to trigger the method "removeFirst"
+        -->
+        <input type="button" value="Remove First Task " onclick="removeFirst()" />
+
+    <ul id="myTaskList"></ul>
+
+    <hr />
+
+    <input type="color" placeholder="Color" id="colorPicker" />
+    <input
+      type="button"
+      value="Change task background"
+      onclick="changeTaskBackgroundColor()"
+    />
+
+    <hr />
+
+    <input type="button" value="Sort" onclick="bubblesort()" />
+
     <script>
-      /* EXERCISE 1
-      Write a function for changing the title of the document in something else.
-      */
-
-       const changeTitle=function(newTitle) {
-        let newTitleVariable=document.getElementsByTagName('h1')
-        newTitleVariable[0].innerText="newTitle"
-        
-       }
-       changeTitle()
-
-
-      /* EXERCISE 2
-      Write a function for changing the class of the title of the page in "myHeading".
-      */
-
-      const addClassToTitle = function () {
-        //
-        const addClass=document.getElementsByTagName('h1')
-        addClass[0].classList.add('myHeading');
-      };
-      addClassToTitle();
-
+      /* EXERCISE 5: 
+                Add a new task to the list.
+                Suggestion:
+                - Use document.getElementById to get the UL item and the input text
+                - Use the document.createElement to create the new List Item
+                - Append the child to the UL
+            */
+           const addNewTask=function(){ 
+               
+               const ulItem=document.getElementById("myTaskList")
       
-      /* EXERCISE 3
-      Write a function for changing the text of only the p which are children of a div.
-      */
+               const liItem=document.createElement("li")
+               const inputValue = document.getElementById("newTask").value;
+                liItem.innerText+=inputValue
+                
+                ulItem.appendChild(liItem)
+               document.getElementById("newTask").value = "";
+              
+            }
+      /* EXERCISE 6: 
+                Create a method "removeLast" which removes the last item from the task list
+            */
+           const removeLast=function(){
+               //const removeLastTask=document.getElementsByTagName()
+               const ulItem=document.getElementById("myTaskList")
+                ulItem.removeChild(ulItem.lastElementChild)
+           }
 
-      const changePcontent = function () {
-        //
-        const changeParagDiv=document.getElementsByTagName('div')[0]
-        const changeParag=changeParagDiv.getElementsByTagName('p')
-       // const pars = document.querySelectorAll('div p')
-        changeParag[0].innerText="The text of only the p which children of a div container will changeThe text of only the p which children of a div container will changeThe text of only the p which children of a div container will changeThe text of only the p which children of a div container will change";
+      /* EXERCISE 7: 
+                Create a method "removeFirst" which removes the first item from the task list
+            */
+            const ulItem=document.getElementById("myTaskList")
+            const removeFirst=function(){
+                ulItem.removeChild(ulItem.firstElementChild)
+            }
+      /* EXERCISE 8: 
+               Create a method "getTasksAsArray" which returns, and prints to the console an array containing the arrComp as string
+            */
+           
+         
 
-      };
-      changePcontent();
 
-      
 
-      /* EXERCISE 4
-      Write a function for changing the destination of every link to https://www.google.com
-      */
-    
-      const changeUrls = function () {
-        const changeLink=document.getElementsByTagName("a")
-        for(let i=0;i<changeLink.length;i++)
-        {
-          changeLink[i].href="https://www.google.com"
-          changeLink[i].innerHTML="google"
+
+            const getTasksAsArray=function(){
+                const ulItem=document.getElementById("myTaskList")
+                const liItem=document.getElementsByTagName("li")
+               
+               
+               for(let i=0;i<liItem.length;i++)
+               {
+                   console.log(liItem[i].value)
+               }
+            }
+            getTasksAsArray();
+
+      /* EXERCISE 9:
+               Create a method "changeTaskBackgroundColor" which takes the color from the color picker with an 
+               onchange event listener ad applies it as background to every list item
+            */
+            const changeTaskBackgroundColor=function(){
+                const liItem=document.getElementsByTagName("li")
+               let colorPick = document.getElementById("colorPicker").value;
+               
+               for(let i=0;i<liItem.length;i++)
+               {
+                   liItem[i].style.backgroundColor=colorPick;
+               }
+                     
+            }
+
+      /* EXTRA */
+
+      /* EXERCISE 10: 
+               Create a method "bubbleSort()" which sort the task list alphabetically using the bubble sort algorithm
+            
+               Use your spare time to beautify your task list via CSS.
+
+               Suggestion:
+               - Break the code into many function for semplicity 
+               - Reuse the functions previously created
+            */
+           /* const bubbleSort=function(){
+               let arrComp=[]
+               for(let i=0;i<liItem.length;i++)
+               {
+                   let firstChar=liItem[i].value;
+                   arrComp=firstChar.charAt(i)
+                  for (let outer = arrComp.length - 1; outer > 0; outer--) {        
+            for (let i = 0; i <= outer - 1; i++) {
+                const j = i + 1
+                
+                if (parseInt(arrComp[i])>parseInt(arrComp[j])) {
+                    const temp = arrComp[i]
+                    arrComp[i] = arrComp[j]
+                    arrComp[j] = temp
+                }
+                
+                console.log({arrComp, i, j, outer})
+            }
         }
+        
+        list.innerHTML = ""
+        
+        for (let task of arrComp) {
+            const newLi = document.createElement("li")
+            newLi.innerHTML = task
+            list.appendChild(newLi)
+        }
+        
     }
-      changeUrls();
-
-      /* EXERCISE console.log('5:', 5)
-       console.log('Write:', Write) a function for adding a new item in the second list.
-       */
-
-      const addToTheSecond = function (content) {
-        
-        const newItemSecondList=document.getElementById("secondList");
-        const newList=document.createElement("li");
-        newList.innerText="4th"
-        newItemSecondList.appendChild(newList);
-        
-      };
-      addToTheSecond();
-
-      /* EXERCISE 6
-      Write a function for adding a second paragraph to the div.
-      */
-
-      const addParagraph = function (content) {
-
-        const childParagraph=document.createElement("p")
-        const divTag=document.getElementsByTagName("div")[0]
-        childParagraph.innerText="I'M a new Paragraph inside divI'M a new Paragraph inside divI'M a new Paragraph inside div";
-        divTag.appendChild(childParagraph);
-      };
-      addParagraph();
-
-      /* EXERCISE 7
-      Write a function for making the first UL disappear.
-      */
-
-       const firstUlDisappear = function () {
-        const firstUl=document.getElementById("firstList")
-        firstUl.style.display="none";
-        //
-      };
-      firstUlDisappear(); 
-
-      /* EXERCISE 8
-      Write a function for making the background of every UL green.
-      */
-
-       const paintItGreen = function () {
-        //
-        const ulBackgroundGreen=document.getElementsByTagName("ul")
-        for(let i=0;i<ulBackgroundGreen.length;i++)
-        {
-          ulBackgroundGreen[i].style.backgroundColor="green"
-        }
-        
-      };
-      paintItGreen(); 
- 
-      /* EXERCISE 9
-      Make the heading of the page change color every time the user clicks on it.
-      */
-     const randomColor = () => {
-            r=Math.floor(Math.random()*255);
-            g=Math.floor(Math.random()*255);
-            b=Math.floor(Math.random()*255);
-        return `rgb(${r},${g},${b})`
-     }
-
-        const makeItClickable = function () {
-        
-
-      
-        const headingClikable=document.getElementsByTagName("h1")[0]
-        headingClikable.addEventListener("click",() =>{headingClikable.style.color = randomColor()})
-
-          
-   
-      }; 
-      
-  
-      /* EXERCISE 10
-      Change the footer text with something else when the user clicks on it.
-      */
-
-        const changeFooterText = function () {
-        const footerClick = document.getElementsByTagName("footer")[0];
-        footerClick.addEventListener("click",() =>{
-        footerClick.innerText="the footer Text is changed"})
-        //
-      };
-      changeFooterText();  
-
-      /* EXERCISE 11
-      Attach an event listener to the input field in the page for console logging its value just after any keystroke.
-      */
-
-      const inputField = document.getElementById("input-field");
-      // ...
-      inputField.addEventListener("keypress",()=>{console.log(inputField.value)})
-      /* EXERCISE 12
-      Create a new welcome alert message when the page successfully loads.
-      */
-
-        window.onload = function () {
-          makeItClickable()
-          alert('page Sucessfully loads');
-       } 
-            window.onload(); 
-        //
     
-
-      /* EXERCISE 13
-      Use HTML5 tags to divide the content of the page in a more semantic way.
-      */
+               }
+           } */
     </script>
   </body>
 </html>
